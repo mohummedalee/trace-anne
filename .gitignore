@@ -18,6 +18,7 @@ build/
 
 # Personal notes
 svelte-notes.md
+specs.md
 
 # IDE
 .idea/
