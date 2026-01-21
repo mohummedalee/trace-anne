@@ -1,0 +1,14 @@
+# Trace Anne Configuration
+
+# Path to the JSONL data file
+dataPath: "./data/samples.jsonl"
+
+# Column names to display in the comparison view
+# For input/output comparison: use "input" and "output"
+# For output/output comparison: use "output_v1" and "output_v2" (or your column names)
+columns:
+  left: "input"
+  right: "output"
+
+# Column name for storing annotations
+annotationColumn: "annotation"

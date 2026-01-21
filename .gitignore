@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+.svelte-kit/
+build/
+
+# Environment variables (if you add them later)
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Personal notes
+svelte-notes.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
