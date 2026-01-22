@@ -27,17 +27,36 @@
   let canGoBack = $derived(currentIndex > 0);
   let canGoNext = $derived(currentIndex < totalRows - 1);
 
-  // Navigation functions
-  function goBack() {
+  // Save current annotation to server
+  async function saveAnnotation() {
+    // Skip if annotation is empty
+    if (!annotation.trim()) return;
+
+    const formData = new FormData();
+    formData.set('index', currentIndex.toString());
+    formData.set('annotation', annotation);
+
+    // Update local data so navigating back shows the saved value
+    data.rows[currentIndex][data.config.annotationColumn] = annotation;
+
+    await fetch('?/save', {
+      method: 'POST',
+      body: formData
+    });
+  }
+
+  // Navigation functions (auto-save before navigating)
+  async function goBack() {
     if (canGoBack) {
+      await saveAnnotation();
       currentIndex--;
-      // Load the annotation for the new row
       annotation = data.rows[currentIndex]?.[data.config.annotationColumn] ?? '';
     }
   }
 
-  function goNext() {
+  async function goNext() {
     if (canGoNext) {
+      await saveAnnotation();
       currentIndex++;
       annotation = data.rows[currentIndex]?.[data.config.annotationColumn] ?? '';
     }
@@ -259,20 +278,20 @@
   <!-- Two-column comparison view -->
   <div class="comparison">
     <div class="column">
-      <div class="column-header">{data.config.columns.left}</div>
+      <div class="column-header">{data.config.labels.left}</div>
       <div class="column-content">
-        {#if diffMode}
-          {@html computeDiff(leftContent, rightContent)}
-        {:else}
-          {@html formatText(leftContent)}
-        {/if}
+        {@html formatText(leftContent)}
       </div>
     </div>
 
     <div class="column">
-      <div class="column-header">{data.config.columns.right}</div>
+      <div class="column-header">{data.config.labels.right}</div>
       <div class="column-content">
-        {@html formatText(rightContent)}
+        {#if diffMode}
+          {@html computeDiff(leftContent, rightContent)}
+        {:else}
+          {@html formatText(rightContent)}
+        {/if}
       </div>
     </div>
   </div>

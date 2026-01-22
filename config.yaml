@@ -3,12 +3,17 @@
 # Path to the JSONL data file
 dataPath: "./data/samples.jsonl"
 
-# Column names to display in the comparison view
+# Column names in your JSONL file
 # For input/output comparison: use "input" and "output"
 # For output/output comparison: use "output_v1" and "output_v2" (or your column names)
 columns:
   left: "input"
   right: "output"
+
+# Display labels shown in the UI (what users see)
+labels:
+  left: "Original Email"
+  right: "Revised Email"
 
 # Column name for storing annotations
 annotationColumn: "annotation"

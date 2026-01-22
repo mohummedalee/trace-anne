@@ -16,6 +16,10 @@ export interface Config {
     left: string;
     right: string;
   };
+  labels: {
+    left: string;
+    right: string;
+  };
   annotationColumn: string;
 }
 
