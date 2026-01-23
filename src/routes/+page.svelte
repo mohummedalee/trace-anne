@@ -113,8 +113,8 @@
 
   /* Top navigation bar */
   .nav-bar {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 1rem;
     background: #f5f5f5;
@@ -153,6 +153,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    justify-self: end;
   }
 
   .diff-toggle label {
